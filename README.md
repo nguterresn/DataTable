@@ -1,7 +1,14 @@
 # DataTable
 
-### Idea
 Table made to allow managing big amount of data. Such as clients info, orders info and other type of data.
+Running application creates file "DataTable.txt" where stores all the data as, for example:
+
+```sh
+1 NameTest Test@Test.com 123123 OpcionalFieldTest
+```
+
+**Note**: It possible to import .txt file into Excel by importing as text file and choose " " (a space) as a delimiter.  
+
 
 ### ScreenShot
 
