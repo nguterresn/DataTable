@@ -1,4 +1,4 @@
-# DataTable
+# DataTable [![GitHub version](https://img.shields.io/github/release/nguterresn/DataTable.svg)](https://github.com/nguterresn/DataTable)
 
 Table made to allow managing big amount of data. Such as clients info, orders info and other type of data.
 Running application creates file "DataTable.txt" where stores all the data as, for example:
