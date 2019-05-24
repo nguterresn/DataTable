@@ -4,10 +4,10 @@ Table made to allow managing big amount of data. Such as clients info, orders in
 Running application creates file "DataTable.txt" where stores all the data as, for example:
 
 ```sh
-1|NameTest|Test@Test.com|123123|OpcionalFieldTest
+1-NameTest-Test@Test.com-123123-Date-OpcionalFieldTest
 ```
 
-**Note**: It is possible to import .txt file into Excel by importing as text file and choose "|" as a delimiter.  
+**Note**: It is possible to import .txt file into Excel by importing as text file and choose "-" as a delimiter.  
 
 
 ### ScreenShot
@@ -19,7 +19,7 @@ Running application creates file "DataTable.txt" where stores all the data as, f
 
 ### Goals:
 
-- Allow user to insert data (Name, Email, Phone Number and Opcional field) into available fields :white_check_mark:
+- Allow user to insert data (Name, Email, Phone Number, Date and Opcional field) into available fields :white_check_mark:
 - Write and save input data in a .txt file :white_check_mark:
 - Read input data from a .txt file, so user can continue adding data without losing information :white_check_mark:
 - Allow user to remove field 
