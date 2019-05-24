@@ -4,10 +4,10 @@ Table made to allow managing big amount of data. Such as clients info, orders in
 Running application creates file "DataTable.txt" where stores all the data as, for example:
 
 ```sh
-1 NameTest Test@Test.com 123123 OpcionalFieldTest
+1|NameTest|Test@Test.com|123123|OpcionalFieldTest
 ```
 
-**Note**: It is possible to import .txt file into Excel by importing as text file and choose " " (a space) as a delimiter.  
+**Note**: It is possible to import .txt file into Excel by importing as text file and choose "|" as a delimiter.  
 
 
 ### ScreenShot
