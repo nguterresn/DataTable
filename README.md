@@ -25,3 +25,5 @@ Running application creates file "DataTable.txt" where stores all the data as, f
 - Allow user to remove field 
 - Updated software design
 
+
+###### Tested on MacOS Mojave and Windows 10.
