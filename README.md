@@ -26,4 +26,4 @@ Running application creates file "DataTable.txt" where stores all the data as, f
 - Updated software design
 
 
-###### Tested on MacOS Mojave and Windows 10.a
+###### Tested on MacOS Mojave and Windows 10.
