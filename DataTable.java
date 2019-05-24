@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
@@ -18,6 +19,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.Color;
 
 public class DataTable extends JFrame {
@@ -33,6 +36,7 @@ public class DataTable extends JFrame {
 	public JTextField Email;
 	public JTextField Phone;
 	public JTextField Op;
+	public JFormattedTextField dateTextField;
 	public JButton Add;
 	
 	int i = 0;
@@ -58,8 +62,9 @@ public class DataTable extends JFrame {
 	
 	public void GetDataFromFile() throws FileNotFoundException, IOException 
 	{
+
+		String parts[] = new String[6];
 		int len = 0;
-		String parts[];
 		
 		try(BufferedReader br = new BufferedReader(new FileReader("DataTable.txt"))) {
 		    StringBuilder sb = new StringBuilder();
@@ -74,11 +79,16 @@ public class DataTable extends JFrame {
 		    
 		    String lines[] = sb.toString().split("\\r?\\n");
 		    
+		    System.out.print(j);
+		    
 		    for (int k = 0; k < j; k++) {
 		    	
-		    	parts = lines[k].split("|");
-		    	
+		    	parts = lines[k].split("-");
 		    	len = parts.length;
+		    	
+		    	if (len == 3) {
+		    		tableModel.addRow(new Object[]{parts[0], parts[1], parts[2]});
+		    	}
 		    	
 		    	if (len == 4) {
 		    		tableModel.addRow(new Object[]{parts[0], parts[1], parts[2], parts[3]});
@@ -86,6 +96,10 @@ public class DataTable extends JFrame {
 		    	
 		    	if (len == 5) {
 		    		tableModel.addRow(new Object[]{parts[0], parts[1], parts[2], parts[3], parts[4]});
+		    	}
+		    	
+		    	if (len == 6) {
+		    		tableModel.addRow(new Object[]{parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]});
 		    	}
 		    	
 		    	try {
@@ -145,6 +159,11 @@ public class DataTable extends JFrame {
 		contentPane.add(Op);
 		Op.setColumns(10);
 		
+		DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+		dateTextField = new JFormattedTextField(format);
+		dateTextField.setBounds(716, 56, 130, 25);
+		contentPane.add(dateTextField);
+		
 		Add = new JButton("Add");
 		Add.setBounds(1003, 43, 117, 54);
 		contentPane.add(Add);
@@ -157,23 +176,23 @@ public class DataTable extends JFrame {
 		    	System.out.print("Adding Row...");	
 		    
 		    	
-		    	if (Name.getText().equals("") || Email.getText().equals("") || Phone.getText().equals("")) {
+		    	if (Name.getText().equals("") || Email.getText().equals("")) {
 		    		lblSuccess.setVisible(false);
 		    		lblError.setVisible(true);
 		    	} 
 		    	else {
 		    		
-		    		tableModel.addRow(new Object[]{i, Name.getText(), Email.getText(), Phone.getText(), Op.getText()});
+		    		tableModel.addRow(new Object[]{i, Name.getText(), Email.getText(), Phone.getText(), dateTextField.getText(), Op.getText()});
 		    		
-		    		String rowdata = i + "|" + Name.getText() + "|" + Email.getText() + "|" + Phone.getText() + "|" + Op.getText(); 
-		    		lblSuccess.setVisible(true);
-		    		lblError.setVisible(false);
+		    		String rowdata = i + "-" + Name.getText() + "-" + Email.getText() + "-" + Phone.getText() + "-" + dateTextField.getText() + "-" + Op.getText(); 
 			    	
 			    	try {
 						writer = new BufferedWriter(new FileWriter("DataTable.txt", true));
 			    	    writer.write(rowdata);
 			    	    writer.newLine();
 			    	    writer.close();
+			    	    lblSuccess.setVisible(true);
+			    		lblError.setVisible(false);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -188,6 +207,7 @@ public class DataTable extends JFrame {
 		        Name.setText("");
 		        Email.setText("");
 		        Phone.setText("");
+		        dateTextField.setText("");
 		        Op.setText("");
 		    }
 		});
@@ -212,10 +232,12 @@ public class DataTable extends JFrame {
 		tableModel.addColumn("Name");
 		tableModel.addColumn("Email");
 		tableModel.addColumn("Phone number");
+		tableModel.addColumn("Date");
 		tableModel.addColumn("Opcional field");
 		table = new JTable(tableModel);
 		table.getColumn("ID").setMaxWidth(30);
 		table.getColumn("Phone number").setMinWidth(60);
+		table.getColumn("Date").setMinWidth(60);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 		table.setBounds(84, 142, 902, 496);
 		contentPane.add(table);
@@ -223,6 +245,10 @@ public class DataTable extends JFrame {
 		JScrollPane scrollBar = new JScrollPane(table);
 		scrollBar.setBounds(84, 142, 1036, 577);
 		contentPane.add(scrollBar);
+		
+		JLabel lblDate = new JLabel("Date");
+		lblDate.setBounds(716, 36, 61, 16);
+		contentPane.add(lblDate);
 		
 	}
 }
